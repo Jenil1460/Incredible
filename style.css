@@ -810,6 +810,7 @@ body {
   background: var(--card-bg);
   position: relative;
   overflow: hidden;
+  color: var(--text-color);
 }
 
 .quiz-option-label::before {
@@ -830,16 +831,27 @@ body {
   transform: translateX(8px);
 }
 
+.dark-mode .quiz-option-label:hover {
+  background: rgba(255, 153, 51, 0.05);
+  border-color: var(--color-secondary-500);
+}
+
 .quiz-option-label:hover::before {
   transform: scaleY(1);
 }
 
 .quiz-option-label input[type="radio"]:checked + span,
 .quiz-option-label:has(input[type="radio"]:checked) {
-  border-color: var(--color-primary-900);
+  border-color: var(--color-secondary-500);
   background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 153, 51, 0.15));
   font-weight: 600;
   transform: translateX(8px);
+  color: var(--text-color);
+}
+
+.dark-mode .quiz-option-label:has(input[type="radio"]:checked) {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 153, 51, 0.08));
+  border-color: var(--color-secondary-500);
 }
 
 .quiz-option-label:has(input[type="radio"]:checked)::before {
