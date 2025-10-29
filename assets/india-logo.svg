@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Chakra outline -->
+    <circle cx="20" cy="20" r="19" stroke="#FFA500" stroke-width="2"/>
+    
+    <!-- Chakra spokes -->
+    <g stroke="#FFA500" stroke-width="2">
+        <line x1="20" y1="1" x2="20" y2="39"/>
+        <line x1="1" y1="20" x2="39" y2="20"/>
+        <line x1="5.5" y1="5.5" x2="34.5" y2="34.5"/>
+        <line x1="34.5" y1="5.5" x2="5.5" y2="34.5"/>
+    </g>
+    
+    <!-- Inner decorative circles -->
+    <circle cx="20" cy="20" r="6" stroke="#FFD700" stroke-width="1.5" fill="none"/>
+    <circle cx="20" cy="20" r="3" fill="#FFD700"/>
+</svg>
