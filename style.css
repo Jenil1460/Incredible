@@ -54,27 +54,28 @@
 }
 
 /* ---------- DARK MODE ---------- */
-.dark-mode {
-  --bg-color: #0a0a0a;
-  --bg-secondary: #141414;
-  --text-color: #f0f0f0;
-  --color-text-medium: #d1d1d1;
-  --color-text-muted: #9ca3af;
-  --card-bg: #1a1a1a;
-  --nav-footer-bg: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  --text-nav-footer: #f0f0f0;
-  --bg-light: #0f0f0f;
+html.dark-mode,
+body.dark-mode {
+  --bg-color: #0a0a0a !important;
+  --bg-secondary: #141414 !important;
+  --text-color: #f0f0f0 !important;
+  --color-text-medium: #d1d1d1 !important;
+  --color-text-muted: #9ca3af !important;
+  --card-bg: #1a1a1a !important;
+  --nav-footer-bg: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%) !important;
+  --text-nav-footer: #f0f0f0 !important;
+  --bg-light: #0f0f0f !important;
   
   /* Dark Mode Glass Effects */
-  --glass-bg: rgba(30, 30, 30, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(30, 30, 30, 0.4) !important;
+  --glass-border: rgba(255, 255, 255, 0.1) !important;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
 
   /* Dark Mode Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.6) !important;
 }
 
 /* ---------- BASE STYLING ---------- */

@@ -37,42 +37,88 @@ function handleNavbarScroll() {
 // --- GLOBAL THEME TOGGLING LOGIC ---
 function applyTheme(theme) {
     const body = document.body;
+    const html = document.documentElement;
+    
+    // Apply theme to both body and html elements for better coverage
     if (theme === 'dark') {
         body.classList.add('dark-mode');
+        html.classList.add('dark-mode');
     } else {
         body.classList.remove('dark-mode');
+        html.classList.remove('dark-mode');
     }
     
+    // Ensure theme is stored in localStorage
+    localStorage.setItem('theme', theme);
+    
     // Update all toggle buttons on all pages
+    updateThemeButtons(theme);
+    
+    // Dispatch a custom event for other components to react to theme changes
+    document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+}
+
+function updateThemeButtons(theme) {
+    const icon = theme === 'dark' ? 'bi-sun-fill' : 'bi-moon-fill';
+    const text = theme === 'dark' ? 'Light' : 'Dark';
+    const buttonHtml = `<i class="bi ${icon} me-1"></i><span class="d-none d-md-inline">${text}</span>`;
+    
     document.querySelectorAll('#darkModeToggle').forEach(button => {
         if(button) {
-            const icon = theme === 'dark' ? 'bi-sun-fill' : 'bi-moon-fill';
-            const text = theme === 'dark' ? 'Light' : 'Dark';
-            button.innerHTML = `<i class="bi ${icon} me-1"></i><span class="d-none d-md-inline">${text}</span>`;
+            button.innerHTML = buttonHtml;
         }
     });
 }
 
 function initializeTheme() {
+    // Try to get theme from localStorage first
     let currentTheme = localStorage.getItem('theme');
     
     if (!currentTheme) {
+        // If no stored theme, check system preference
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             currentTheme = 'dark';
         } else {
             currentTheme = 'light';
         }
+        // Store the initial theme
+        localStorage.setItem('theme', currentTheme);
     }
     
-    applyTheme(currentTheme);
+    // Apply the theme immediately (classes only, buttons will update when DOM is ready)
+    const body = document.body;
+    const html = document.documentElement;
+    if (currentTheme === 'dark') {
+        body.classList.add('dark-mode');
+        html.classList.add('dark-mode');
+    } else {
+        body.classList.remove('dark-mode');
+        html.classList.remove('dark-mode');
+    }
+    
+    // Update buttons if DOM is ready, otherwise wait
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            updateThemeButtons(currentTheme);
+        });
+    } else {
+        updateThemeButtons(currentTheme);
+    }
+    
+    // Listen for system theme changes
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                // Only auto-switch if user hasn't manually chosen a theme
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
 }
 
 window.toggleTheme = function() {
-    const body = document.body;
-    const isDark = body.classList.contains('dark-mode');
-    const newTheme = isDark ? 'light' : 'dark';
-    
-    localStorage.setItem('theme', newTheme);
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     applyTheme(newTheme);
 }
 
@@ -123,7 +169,16 @@ window.addEventListener('hashchange', () => {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme on all pages
     initializeTheme();
-    document.getElementById('darkModeToggle')?.addEventListener('click', toggleTheme);
+    
+    // Use event delegation for dark mode toggle to handle dynamic content
+    document.addEventListener('click', (e) => {
+        const darkModeBtn = e.target.closest('#darkModeToggle');
+        if (darkModeBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleTheme();
+        }
+    });
 
     // Initialize scroll animations
     initScrollAnimations();

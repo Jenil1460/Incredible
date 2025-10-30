@@ -87,16 +87,14 @@
   <script src="quiz.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Theme and navbar handlers from site-wide scripts
-      if (typeof initializeTheme === 'function') initializeTheme();
-      document.getElementById('darkModeToggle')?.addEventListener('click', () => {
-        if (typeof toggleTheme === 'function') toggleTheme();
-      });
-      if (typeof initScrollAnimations === 'function') initScrollAnimations();
-      if (typeof handleNavbarScroll === 'function') window.addEventListener('scroll', handleNavbarScroll);
-      // Quiz initializes itself via quiz.js
-    });
+    // Theme initialization is handled by script.js
+    // The DOMContentLoaded event in script.js will:
+    // 1. Initialize the theme from localStorage or system preference
+    // 2. Set up event delegation for the dark mode toggle button
+    // 3. Initialize scroll animations
+    // 4. Add scroll listener for navbar
+    
+    // No need for duplicate theme handling here - script.js handles it globally
   </script>
 </body>
 </html>

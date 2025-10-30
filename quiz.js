@@ -448,8 +448,18 @@ function slugify(s){
 restartBtn?.addEventListener('click', restartQuiz);
 shareBtn?.addEventListener('click', shareResult);
 
+// Watch for theme changes
+document.addEventListener('themeChanged', (e) => {
+  // Re-apply any necessary theme-specific UI updates
+  const isDark = e.detail.theme === 'dark';
+  document.documentElement.classList.toggle('dark-mode', isDark);
+  document.body.classList.toggle('dark-mode', isDark);
+});
+
 // Init when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  // Don't initialize theme here - let script.js handle it via the inline script in quiz.html
+  // The theme will be applied by initializeTheme() called from the inline script
   initQuiz();
 });
 
