@@ -16,7 +16,13 @@
   <header>
     <nav class="navbar navbar-expand-lg sticky-top shadow-lg" style="background-color: var(--nav-footer-bg);">
       <div class="container-fluid container-lg">
-        <a class="navbar-brand text-white fw-bold fs-4" href="index.html#home">Incredible India</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html#home">
+          <img src="assets/india-logo.svg" alt="Incredible India Logo" class="brand-logo" width="40" height="40">
+          <div class="brand-text">
+            <span class="brand-title">Incredible India</span>
+            <span class="brand-tagline">Athithi Devo Bhava</span>
+          </div>
+        </a>
         <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDest"
           aria-controls="navbarNavDest" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -26,6 +32,7 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item"><a class="nav-link text-white" href="index.html#home">Home</a></li>
             <li class="nav-item"><a class="nav-link text-warning fw-semibold" href="destination.html">Destinations</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="gallery.html">Gallery</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="quiz.html">Quiz</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="index.html#about">About</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="index.html#contact">Contact</a></li>
@@ -81,13 +88,6 @@
         <p class="mt-2 text-muted">Loading Destinations...</p>
       </div>
     </section>
-
-    <section id="image-gallery" class="py-5 bg-light">
-      <div class="container-lg">
-        <h2 class="text-center display-6 fw-bold text-primary mb-5">Gallery of Wonders</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3" id="galleryContainer"></div>
-      </div>
-    </section>
   </main>
 
   <!-- Detail modal -->
@@ -101,21 +101,6 @@
         <div class="modal-body p-4" id="modal-body-content"></div>
         <div class="modal-footer justify-content-start">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Image Modal -->
-  <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content bg-transparent border-0">
-        <div class="modal-body p-0 position-relative">
-          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-10" data-bs-dismiss="modal" aria-label="Close"></button>
-          <img id="modal-image-bs" src="" alt="Gallery Image" class="img-fluid rounded shadow-lg w-100">
-          <div class="text-white text-center p-2 bg-dark bg-opacity-75 rounded-bottom">
-            <p id="modal-caption-bs" class="mb-0"></p>
-          </div>
         </div>
       </div>
     </div>
@@ -136,8 +121,8 @@
   <script>
     // Destination page init
     document.addEventListener('DOMContentLoaded', () => {
-      initializeTheme();
-      document.getElementById('darkModeToggle')?.addEventListener('click', toggleTheme);
+      // Theme is already initialized by script.js
+      // No need to call initializeTheme again or add duplicate event listeners
       
       // Initialize scroll animations
       initScrollAnimations();
@@ -146,7 +131,6 @@
       if (typeof INDIA_DESTINATIONS !== 'undefined') {
         renderStateFilters();
         displayAllDestinations();
-        renderGallery();
         enableDestinationSearchFilters();
       }
     });

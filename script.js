@@ -131,8 +131,24 @@ const quizContent = document.getElementById('quiz-content');
 const pageRoutes = {
     'home': renderHomePage,
     'about': renderAboutPage,
-    'contact': renderContactPage, // Now linked to the defined function below
+    'contact': renderContactPage,
 };
+
+// Update active nav link styling
+function updateActiveNavLink(pageName) {
+    // Remove active class from all nav links
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.classList.remove('text-warning', 'fw-semibold');
+        link.classList.add('text-white');
+    });
+    
+    // Add active class to current page link
+    const activeLink = document.querySelector(`.navbar-nav .nav-link[href="#${pageName}"]`);
+    if (activeLink) {
+        activeLink.classList.remove('text-white');
+        activeLink.classList.add('text-warning', 'fw-semibold');
+    }
+}
 
 // Only for use on index.html
 window.navigateTo = function(pageName) {
@@ -148,6 +164,9 @@ window.navigateTo = function(pageName) {
 
     window.location.hash = pageName;
     currentPage = pageName;
+    
+    // Update active nav link
+    updateActiveNavLink(pageName);
 
     appContent.innerHTML = '';
     pageRoutes[pageName]();
@@ -165,10 +184,12 @@ window.addEventListener('hashchange', () => {
     }
 });
 
+// Initialize theme immediately (before DOMContentLoaded) to prevent flash
+initializeTheme();
+
 // Initial load: determine page from URL hash or default to 'home'
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme on all pages
-    initializeTheme();
+    // Theme already initialized above
     
     // Use event delegation for dark mode toggle to handle dynamic content
     document.addEventListener('click', (e) => {
@@ -729,41 +750,10 @@ window.openDetailModal = function(destinationId) {
     detailModal.show();
 }
 
-function renderImageGallery(images) {
-    const galleryHtml = images.map((img, index) => `
-        <div class="col reveal" style="animation-delay: ${index * 0.05}s">
-            <div class="card bg-dark text-white border-0 overflow-hidden gallery-item" role="button" onclick="openImageModal('${img.url}', '${img.caption}')">
-                <img src="${img.url}" class="img-fluid object-fit-cover w-100" style="height: 220px;" alt="${img.caption}">
-                <div class="card-img-overlay d-flex align-items-end p-3">
-                    <p class="card-text small mb-0 fw-semibold">${img.caption}</p>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    if (galleryContainer) {
-        galleryContainer.innerHTML = galleryHtml;
-        setTimeout(() => initScrollAnimations(), 100);
-    }
-}
-
-window.openImageModal = function(url, caption) {
-    document.getElementById('modal-image-bs').src = url;
-    document.getElementById('modal-caption-bs').textContent = caption;
-    const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
-    imageModal.show();
-}
-
 // Helper functions for destination page
 function displayAllDestinations() {
     if (typeof renderDestinationCards === 'function') {
         renderDestinationCards(INDIA_DESTINATIONS);
-    }
-}
-
-function renderGallery() {
-    if (typeof renderImageGallery === 'function' && typeof GALLERY_IMAGES !== 'undefined') {
-        renderImageGallery(GALLERY_IMAGES);
     }
 }
 

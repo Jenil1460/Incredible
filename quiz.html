@@ -16,7 +16,13 @@
   <header>
     <nav class="navbar navbar-expand-lg sticky-top shadow-lg" style="background-color: var(--nav-footer-bg);">
       <div class="container-fluid container-lg">
-        <a class="navbar-brand text-white fw-bold fs-4" href="index.html#home">Incredible India</a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html#home">
+          <img src="assets/india-logo.svg" alt="Incredible India Logo" class="brand-logo" width="40" height="40">
+          <div class="brand-text">
+            <span class="brand-title">Incredible India</span>
+            <span class="brand-tagline">Athithi Devo Bhava</span>
+          </div>
+        </a>
         <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavQuiz"
           aria-controls="navbarNavQuiz" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -26,6 +32,7 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item"><a class="nav-link text-white" href="index.html#home">Home</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="destination.html">Destinations</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="gallery.html">Gallery</a></li>
             <li class="nav-item"><a class="nav-link text-warning fw-semibold" href="quiz.html">Quiz</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="index.html#about">About</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="index.html#contact">Contact</a></li>
@@ -85,16 +92,5 @@
   <script src="data.js"></script>
   <script src="script.js"></script>
   <script src="quiz.js"></script>
-
-  <script>
-    // Theme initialization is handled by script.js
-    // The DOMContentLoaded event in script.js will:
-    // 1. Initialize the theme from localStorage or system preference
-    // 2. Set up event delegation for the dark mode toggle button
-    // 3. Initialize scroll animations
-    // 4. Add scroll listener for navbar
-    
-    // No need for duplicate theme handling here - script.js handles it globally
-  </script>
 </body>
 </html>
